@@ -9,15 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "devextreme": "23.1.6",
+    "devextreme-react": "23.1.6",
+    "next": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "next": "latest"
+    "recharts": "^2.10.1"
   },
   "devDependencies": {
     "autoprefixer": "latest",
-    "postcss": "latest",
-    "tailwindcss": "latest",
     "eslint": "latest",
-    "eslint-config-next": "latest"
+    "eslint-config-next": "latest",
+    "postcss": "latest",
+    "tailwindcss": "latest"
   }
 }
