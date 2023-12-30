@@ -9,9 +9,6 @@ const Accordion = dynamic(() => import("devextreme-react/accordion"), {
 
 export const StackContents = () => {
   const { stackData } = usePageInfo();
-
-  console.log("this be stack data", stackData);
-
   return (
     <>
       Hi from stack c ontest

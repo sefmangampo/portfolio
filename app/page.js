@@ -19,16 +19,32 @@ import {
 export default function Home() {
   const [pageInfo, dispatch] = useReducer(pageReducer, pageData);
 
+  const { selectedPage } = pageInfo;
+
   const welcomeRef = useRef(null);
   const stackRef = useRef(null);
   const expRef = useRef(null);
   const contactRef = useRef(null);
 
   useEffect(() => {
+    const scrollToView = (ref, index) => {
+      if (index == selectedPage) {
+        ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    };
+
+    // const set
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.map((entry, index) => {
-          console.log(index, entry.isIntersecting, entry.target.innerHTML);
+          if (entry.isIntersecting) {
+            const pageNumber = entry.target.getAttribute("data-page-number");
+            dispatch({
+              type: "setSelectedPage",
+              payload: pageNumber,
+            });
+          }
         });
       },
       {
@@ -37,11 +53,23 @@ export default function Home() {
       }
     );
 
-    if (welcomeRef.current) observer.observe(welcomeRef.current);
-    if (stackRef.current) observer.observe(stackRef.current);
-    if (expRef.current) observer.observe(expRef.current);
-    if (contactRef.current) observer.observe(contactRef.current);
-  }, []);
+    if (welcomeRef.current) {
+      observer.observe(welcomeRef.current);
+      scrollToView(welcomeRef, 1);
+    }
+    if (stackRef.current) {
+      observer.observe(stackRef.current);
+      scrollToView(stackRef, 2);
+    }
+    if (expRef.current) {
+      observer.observe(expRef.current);
+      scrollToView(expRef, 3);
+    }
+    if (contactRef.current) {
+      observer.observe(contactRef.current);
+      scrollToView(contactRef, 4);
+    }
+  }, [selectedPage]);
 
   return (
     <PageDataContext.Provider value={pageInfo}>

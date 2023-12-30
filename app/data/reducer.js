@@ -9,6 +9,11 @@ export default function pageReducer(state, action) {
         ...state,
         selectedPage: action.payload,
       };
+    case "setUserClicked":
+      return {
+        ...state,
+        userClicked: action.payload,
+      };
     default:
       return {
         ...state,
